@@ -1,9 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import useClickOutside from '@/hooks/useClickOutside';
 
 const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
-    const clickRef = useRef();
-    useClickOutside(clickRef, onClose);
     const keydownHandler = ({ key }) => {
         switch (key) {
             case 'Escape':
@@ -16,9 +13,8 @@ const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
         document.addEventListener('keydown', keydownHandler);
         return () => document.removeEventListener('keydown', keydownHandler);
     });
-
     return !isVisible ? null : (
-        <div className="modal" onClick={onClose}>
+        <div className="modal">
             <div className="modal-dialog" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
                     <h3 className="modal-title">{title}</h3>
