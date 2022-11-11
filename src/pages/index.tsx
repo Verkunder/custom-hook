@@ -1,11 +1,13 @@
 import React from 'react';
+import ImageFetch from "@/components/core/ImageFetch";
+import WindowSizeExampleHook from "@/components/core/WindowSizeExampleHook";
 
 function IndexPage() {
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Next.js starter pack</h1>
-            {process.env.NEXT_PUBLIC_APP_ENV}
-        </div>
+        <>
+        {/*<ImageFetch />*/}
+            <WindowSizeExampleHook />
+        </>
     );
 }
 
