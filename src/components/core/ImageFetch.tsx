@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useFetch from '@/hooks/useFetch';
+import { TestContext } from '@/pages';
 
 const ImageFetch = () => {
     const res = useFetch({
@@ -7,7 +8,7 @@ const ImageFetch = () => {
         method: 'get',
     });
 
-    console.log(res);
+    const test = useContext(TestContext);
 
     if (res.error) {
         return <div>Ошибка!</div>;
@@ -18,9 +19,12 @@ const ImageFetch = () => {
     }
     const imageUrl = res.response.message;
     return (
-        <div>
-            <img src={imageUrl} alt="avatar" width={400} height="auto" />
-        </div>
+        <>
+            {test}
+            <div>
+                <img src={imageUrl} alt="avatar" width={400} height="auto" />
+            </div>
+        </>
     );
 };
 
