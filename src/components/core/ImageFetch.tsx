@@ -1,8 +1,18 @@
 import React from 'react';
-import useFetch from "@/hooks/useFetch";
+import useFetch from '@/hooks/useFetch';
 
 const ImageFetch = () => {
-    const res = useFetch('https://dog.ceo/api/breeds/image/random', {});
+    const res = useFetch({
+        url: 'https://dog.ceo/api/breeds/image/random',
+        method: 'get',
+    });
+
+    console.log(res);
+
+    if (res.error) {
+        return <div>Ошибка!</div>;
+    }
+
     if (!res.response) {
         return <div>Loading...</div>;
     }

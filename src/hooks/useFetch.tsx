@@ -1,31 +1,26 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
+import axios, { AxiosRequestConfig } from 'axios';
 
-const useFetch = (url, options) => {
+const useFetch = (options: AxiosRequestConfig) => {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
-    const [abort, setAbort] = useState(() => {
-    });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const abortController = new AbortController();
                 const signal = abortController.signal;
-                setAbort(abortController.abort);
-                const res = await fetch(url, {...options, signal});
-                const json = await res.json();
+                const res = await axios({ ...options, signal });
+                const json = await res.data;
                 setResponse(json);
             } catch (error) {
                 setError(error);
             }
         };
         fetchData();
-        return () => {
-            abort();
-        }
     }, []);
 
-    return {response, error, abort};
+    return { response, error };
 };
 
-export default useFetch
+export default useFetch;
